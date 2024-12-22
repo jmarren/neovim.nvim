@@ -616,8 +616,18 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
+        templ = {
+          filetypes = { 'templ' },
+        },
         gopls = {
           filetypes = { 'go' },
+        },
+        sqlls = {
+          filetypes = { 'sql' },
+          cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
+          root_dir = function()
+            return vim.loop.cwd()
+          end,
         },
         -- pyright = {},
         -- rust_analyzer = {},
