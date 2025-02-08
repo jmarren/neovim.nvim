@@ -105,6 +105,8 @@ vim.opt.relativenumber = true
 vim.opt.statuscolumn = '%{v:relnum} %{v:lnum}'
 ---- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+vim.filetype.add { extension = { templ = 'templ' } }
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -616,11 +618,15 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
+        elixirls = {
+          filetypes = { 'ex', 'exs' },
+        },
         templ = {
           filetypes = { 'templ' },
         },
         gopls = {
           filetypes = { 'go' },
+          auto_import = true,
         },
         sqlls = {
           filetypes = { 'sql' },
@@ -629,6 +635,7 @@ require('lazy').setup({
             return vim.loop.cwd()
           end,
         },
+        -- neorg = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -637,7 +644,9 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {
+          filetypes = { 'javascript', 'typescript', 'html', 'typescriptreact', 'typescript.tsx', 'htmlangular' },
+        },
         --
 
         lua_ls = {
@@ -939,6 +948,8 @@ require('lazy').setup({
   --
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
+  -- require 'neorg'
+  --
   --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
@@ -946,7 +957,6 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
