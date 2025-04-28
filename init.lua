@@ -645,13 +645,14 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {
-          filetypes = { 'javascript', 'typescript', 'html', 'typescriptreact', 'typescript.tsx', 'htmlangular' },
+          filetypes = { 'javascript', 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+          format_on_save = { 'prettier.nvim' },
         },
         --
 
         lua_ls = {
           -- cmd = {...},
-          -- filetypes = { ...},
+          filetypes = { 'lua' },
           -- capabilities = {},
           settings = {
             Lua = {
@@ -712,6 +713,7 @@ require('lazy').setup({
     },
     opts = {
       notify_on_error = false,
+      ensure_installed = { 'prettier' },
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -730,6 +732,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        typescript = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
